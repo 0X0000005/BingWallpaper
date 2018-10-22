@@ -5,3 +5,4 @@
 /org.eclipse.wst.common.project.facet.core.xml
 /org.eclipse.wst.jsdt.ui.superType.container
 /org.eclipse.wst.jsdt.ui.superType.name
+*.eclipse.core.runtime.prefs

@@ -53,6 +53,7 @@ public class GetBingJson {
 	 * @return
 	 */
 	private String readUrlContent(String urlStr) {
+		System.out.println(urlStr);
 		BufferedReader reader = null;
 		String content = "";
 		try {
@@ -158,12 +159,23 @@ public class GetBingJson {
 		for (Map.Entry<String, Object> entry : obj.entrySet()) {
 			if (entry.getKey().equals("copyright")) {
 				String copyright = (String) entry.getValue();
-				String[] copy = copyright.split("\\(\\?");
-				desc = copy[0];
+				desc = splitGetDesc(copyright);
 			}
 		}
 		logger.info("解析图片描述为:"+desc);
 		return desc;
+	}
+	
+	public String splitGetDesc(String copyright) {
+		final String split1 = "(©";
+		final String split2 = "'";
+		if(-1 != copyright.indexOf(split1)) {
+			return copyright.split("\\(©")[0];
+		}else if (-1 != copyright.indexOf(split2)) {
+			return copyright.split(split2)[0];
+		}else {
+			return copyright;
+		}
 	}
 	
 	public int getFileSize(String urlString) {
